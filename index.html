@@ -71,10 +71,6 @@
             gap: 15px;
             margin-bottom: 25px;
         }
-        .hero-logo {
-            height: 50px;
-            width: auto;
-        }
         .hero-category {
             background-color: var(--color-accent);
             color: var(--color-white);
@@ -216,12 +212,13 @@
             border-left: 4px solid var(--color-main);
             padding: 25px;
             border-radius: 0 8px 8px 0;
-            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
         .tech-panel h4 {
             font-size: 1.1rem;
             color: var(--color-main);
-            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -234,15 +231,6 @@
         .tech-panel p {
             font-size: 0.9rem;
             color: #334155;
-            margin-bottom: 12px;
-        }
-        .tech-panel ul {
-            padding-left: 20px;
-            font-size: 0.85rem;
-            color: #475569;
-        }
-        .tech-panel li {
-            margin-bottom: 6px;
         }
 
         /* Editorial Note */
@@ -259,6 +247,7 @@
         .img-container {
             margin-top: 15px;
             text-align: center;
+            width: 100%;
         }
         .zoomable-image {
             max-width: 100%;
@@ -268,15 +257,17 @@
             transition: all 0.3s ease;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
+        
         /* Zoom Overlay Class Controlled by JS */
         .zoomable-image.zoomed {
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) scale(1.5);
+            transform: translate(-50%, -50%) scale(1.1);
             z-index: 2000;
             max-width: 90vw;
             max-height: 90vh;
+            object-fit: contain;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             cursor: zoom-out;
         }
@@ -286,7 +277,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(9, 26, 45, 0.8);
+            background: rgba(9, 26, 45, 0.85);
             z-index: 1999;
             opacity: 0;
             pointer-events: none;
@@ -338,7 +329,6 @@
     <header class="hero">
         <div class="hero-container">
             <div class="hero-brand">
-                <img src="logo.png" alt="CHRONIX" class="hero-logo">
                 <span class="hero-category">Technical Commentary</span>
             </div>
             <h1 class="hero-title">教えてプロの人！熱を測るカメラ（サーモグラフィ）の秘密</h1>
@@ -363,7 +353,7 @@
                         <div class="avatar">👨‍💻</div>
                         <div class="bubble">
                             <span class="speaker-name">プロのエンジニア</span>
-                            <strong>大正解！実はそこが一番の難所なんだ。</strong> カメラのセンサー（目）が熱を持つと、景色がモヤモヤして正しい温度が分からなくなる（ノイズやドリフト）。逆に、相手が熱すぎると画面が真っ白にフリーズする（飽和）。この2つをしっかり区別しないとお客さんの信頼を失ってしまうんだよ。
+                            <strong>大正解！実はそこが一番の難所んだ。</strong> カメラのセンサー（目）が熱を持つと、景色がモヤモヤして正しい温度が分からなくなる（ノイズやドリフト）。逆に、相手が熱すぎると画面が真っ白にフリーズする（飽和）。この2つをしっかり区別しないとお客さんの信頼を失ってしまうんだよ。
                         </div>
                     </div>
                     <div class="dialogue-row student">
@@ -382,9 +372,14 @@
                     </div>
                 </div>
                 <div class="tech-panel">
-                    <h4>技術原理の解説（内部熱雑音の相殺）</h4>
-                    <p>非冷却型赤外線センサー（マイクロボロメータ）は、入射する赤外線による極小の抵抗変化を検出するため、素子自体の温度変化（内部熱雑音）の影響を直接受けます。</p>
-                    <p>この物理的限界を解決するため、回路内に基準となるブラインド画素（赤外線を遮断した画素）やサーミスタを配置し、環境温度変化に伴うボロメータのベースライン変動（温度ドリフト）を動的に差分計測し、実温度を算出しています。</p>
+                    <div>
+                        <h4>技術原理の解説（内部熱雑音の相殺）</h4>
+                        <p style="margin-top: 10px;">非冷却型赤外線センサー（マイクロボロメータ）は、入射する赤外線による極小の抵抗変化を検出するため、素子自体の温度変化（内部熱雑音）の影響を直接受けます。</p>
+                        <p style="margin-top: 10px;">この物理的限界を解決するため、回路内に基準となるブラインド画素（赤外線を遮断した画素）やサーミスタを配置し、環境温度変化に伴うボロメータのベースライン変動（温度ドリフト）を動的に差分計測し、実温度を算出しています。</p>
+                    </div>
+                    <div class="img-container">
+                        <img src="censor1.png" alt="非冷却型赤外線センサーの物理的限界と解決策（温度ドリフト補正）" class="zoomable-image">
+                    </div>
                 </div>
             </div>
         </section>
@@ -397,7 +392,7 @@
                         <div class="avatar">🧑‍🎓</div>
                         <div class="bubble">
                             <span class="speaker-name">中学生</span>
-                            昔の熱測定カメラって、ときどき「カシャッ」って画面が止まっていまたよね。最近のカメラは止まらない気がします。
+                            昔の熱測定カメラって、ときどき「カシャッ」って画面が止まっていましたよね。最近のカメラは止まらない気がします。
                         </div>
                     </div>
                     <div class="dialogue-row engineer">
@@ -418,14 +413,19 @@
                         <div class="avatar">👨‍💻</div>
                         <div class="bubble">
                             <span class="speaker-name">プロのエンジニア</span>
-                            その通り。そこで開発されたのが<strong>「シャッターレス補正」</strong>。シャッターを動かさずに、高度な計算（演算プロセス）だけで、カメラが動きながら自分のズレを自動修正し続ける仕組みんだ。これで24時間ノンストップの監視が可能になったんだよ。
+                            その通り。そこで開発されたのが<strong>「シャッターレス補正」</strong>。シャッターを動かさずに、高度な計算（演算プロセス）だけで、カメラが動きながら自分のズレを自動修正し続ける仕組みなんだ。これで24時間ノンストップの監視が可能になったんだよ。
                         </div>
                     </div>
                 </div>
                 <div class="tech-panel">
-                    <h4>技術原理の解説（シャッターレス自動校正）</h4>
-                    <p>従来のサーモグラフィは、定期的（または温度変化時）に内部のメインシャッター（機械式フラップ）を閉じることで均一な温度環境（黒体基準）を作り出し、オフセット値をリセット（1点補正：NUC）していました。</p>
-                    <p>最新のシャッターレス機構では、筐体および光学系の多点温度動態データと、画像特徴量解析を組み合わせた予測アルゴリズムを採用し、連続的なビデオストリームを中断することなくリアルタイムにキャリブレーションを実行します。</p>
+                    <div>
+                        <h4>技術原理の解説（シャッターレス自動校正）</h4>
+                        <p style="margin-top: 10px;">従来のサーモグラフィは、定期的（または温度変化時）に内部のメインシャッター（機械式フラップ）を閉じることで均一な温度環境（黒体基準）を作り出し、オフセット値をリセット（1点補正：NUC）していました。</p>
+                        <p style="margin-top: 10px;">最新のシャッターレス機構では、筐体および光学系の多点温度動態データと、画像特徴量解析を組み合わせた予測アルゴリズムを採用し、連続的なビデオストリームを中断することなくリアルタイムにキャリブレーションを実行します。</p>
+                    </div>
+                    <div class="img-container">
+                        <img src="censor2.png" alt="従来技術：シャッター式自動校正 vs 最新技術：シャッターレス自動校正" class="zoomable-image">
+                    </div>
                 </div>
             </div>
         </section>
@@ -459,14 +459,19 @@
                         <div class="avatar">👨‍💻</div>
                         <div class="bubble">
                             <span class="speaker-name">プロのエンジニア</span>
-                            工場での<strong>「猛特訓（キャリブレーション）」**さ。出荷前に、カメラをいろんな温度の部屋に入れて、全画素のクセを徹底的に調べ上げる。そして**「温度ごとのクセのカンニングペーパー（補正テーブル）」</strong>を数式化してカメラに記憶させておくんだ。本番では、その数式を使って1秒間に何十回も超高速でバラつきを補正しているんだよ。
+                            工場での<strong>「猛特訓（キャリブレーション）」</strong>さ。出荷前に、カメラをいろんな温度の部屋に入れて、全画素のクセを徹底的に調べ上げる。そして<strong>「温度ごとのクセのカンニングペーパー（補正テーブル）」</strong>を数式化してカメラに記憶させておくんだ。本番では、その数式を使って1秒間に何十回も超高速でバラつきを補正しているんだよ。
                         </div>
                     </div>
                 </div>
                 <div class="tech-panel">
-                    <h4>技術原理の解説（固定パターンノイズと非線形補正）</h4>
-                    <p>半導体製造プロセス上の微小なバラつきに起因して、各画素は固有の感度およびオフセット（固定パターンノイズ：FPN）を有します。この応答特性は均一ではなく、環境温度に対して非線形な挙動を示します。</p>
-                    <p>製造工程において多点環境温度下でのキャリブレーションを行い、各画素の応答曲線を高次多項式で近似した「補正係数テーブル（Look-Up Table）」を生成。動作時にこの数式をハードウェア（FPGA等）で高速演算し、全画素の出力を均一化しています。</p>
+                    <div>
+                        <h4>技術原理の解説（固定パターンノイズと非線形補正）</h4>
+                        <p style="margin-top: 10px;">半導体製造プロセス上の微小なバラつきに起因して、各画素は固有の感度およびオフセット（固定パターンノイズ：FPN）を有します。この応答特性は均一ではなく、環境温度に対して非線形な挙動を示します。</p>
+                        <p style="margin-top: 10px;">製造工程において多点環境温度下でのキャリブレーションを行い、各画素の応答曲線を高次多項式で近似した「補正係数テーブル（Look-Up Table）」を生成。動作時にこの数式をハードウェア（FPGA等）で高速演算し、全画素の出力を均一化しています。</p>
+                    </div>
+                    <div class="img-container">
+                        <img src="censor3.png" alt="課題：固定パターンノイズ(FPN)と解決策：高次多項式近似による非線形補正" class="zoomable-image">
+                    </div>
                 </div>
             </div>
         </section>
@@ -500,7 +505,7 @@
                         <div class="avatar">👨‍💻</div>
                         <div class="bubble">
                             <span class="speaker-name">プロのエンジニア</span>
-                            例えば、カメラをどこに動かしても、画面の同じ場所にずーっと居座り続ける不自然なシミがあったとする。カメラは<strong>「景色がずっと同じはずがない。これは画素が劣化したゴミだな？」**と見破るんだ。そして、周りの正常な画素の平均値を使って、そのゴミをゆっくり背景に溶け込ませて消し去る（時系列フィルタリング）。
+                            例えば、カメラをどこに動かしても、画面の同じ場所にずーっと居座り続ける不自然なシミがあったとする。カメラは<strong>「景色がずっと同じはずがない。これは画素が劣化したゴミだな？」</strong>と見破るんだ。そして、周りの正常な画素の平均値を使って、そのゴミをゆっくり背景に溶け込ませて消し去る（時系列フィルタリング）。
                         </div>
                     </div>
                     <div class="dialogue-row student">
@@ -519,9 +524,14 @@
                     </div>
                 </div>
                 <div class="tech-panel">
-                    <h4>技術原理の解説（シーンベース適応型補正）</h4>
-                    <p>長期間の連続運用によるボロメータの経時劣化や構造的変化は、固定的なキャリブレーションテーブルのみでは完全に相殺できず、「感度ドリフト」として画面上の固定ノイズとして現れます。</p>
-                    <p>これを解決するため、統計的アプローチを用いた「シーンベース補正（SBN）」を実行します。カメラモーションに伴うシーン内の空間的移動特性を利用し、時間方向に一定値を取り続ける画素の応答エラーをカルマンフィルタや時系列低域通過フィルタを用いて同定・分離し、動的に自動適応・修正します。</p>
+                    <div>
+                        <h4>技術原理の解説（シーンベース適応型補正）</h4>
+                        <p style="margin-top: 10px;">長期間の連続運用によるボロメータの経時劣化や構造的変化は、固定的なキャリブレーションテーブルのみでは完全に相殺できず、「感度ドリフト」として画面上の固定ノイズとして現れます。</p>
+                        <p style="margin-top: 10px;">これを解決するため、統計的アプローチを用いた「シーンベース補正（SBN）」を実行します。カメラモーションに伴うシーン内の空間的移動特性を利用し、時間方向に一定値を取り続ける画素の応答エラーをカルマンフィルタや時系列低域通過フィルタを用いて同定・分離し、動的に自動適応・修正します。</p>
+                    </div>
+                    <div class="img-container">
+                        <img src="censor4.png" alt="経時劣化・構造変化による感度ドリフトと解決策：シーンベース補正(SBN)" class="zoomable-image">
+                    </div>
                 </div>
             </div>
         </section>
@@ -565,7 +575,7 @@
                     if (img.classList.contains('zoomed')) {
                         minimizeImage(img);
                     } else {
-                        // Reset any other zoomed image first
+                        // 他に拡大されている画像があれば元に戻す
                         const currentZoomed = document.querySelector('.zoomable-image.zoomed');
                         if (currentZoomed) minimizeImage(currentZoomed);
                         
@@ -574,10 +584,18 @@
                 });
             });
 
-            // Close when clicking overlay background
+            // 背景オーバーレイのクリックで縮小
             overlay.addEventListener('click', () => {
                 const currentZoomed = document.querySelector('.zoomable-image.zoomed');
                 if (currentZoomed) minimizeImage(currentZoomed);
+            });
+
+            // エスケープキーで縮小
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    const currentZoomed = document.querySelector('.zoomable-image.zoomed');
+                    if (currentZoomed) minimizeImage(currentZoomed);
+                }
             });
 
             function maximizeImage(img) {
